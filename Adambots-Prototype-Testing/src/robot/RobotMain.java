@@ -12,16 +12,12 @@ public class RobotMain extends IterativeRobot {
 	joy = new FancyJoystick(1);
     }
     
-    public void autonomousPeriodic() {
-
-    }
-    
     public void teleopPeriodic() {
         
     }
     
-    public void testPeriodic() {
+    public void autonomousPeriodic() {}
     
-    }
+    public void testPeriodic() {}
     
 }
