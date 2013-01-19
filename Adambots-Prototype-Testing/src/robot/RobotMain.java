@@ -51,9 +51,12 @@ public class RobotMain extends IterativeRobot {
 	    if (!ds.getDigitalIn(8)) {
 		setMotor1 = 0;
 		setMotor2 = 0;
+		
 	    } else if (!ds.getDigitalIn(7)) {
-		setMotor1 = (2.05 - ds.getAnalogIn(1)) / 2.05;
-                setMotor2 = (2.05 - ds.getAnalogIn(2)) / 2.05;
+		setMotor1 = box.getScaledAnalogIn(1, 2.05);
+		setMotor2 = box.getScaledAnalogIn(2, 2.05);
+		//setMotor1 = (2.05 - ds.getAnalogIn(1)) / 2.05;
+                //setMotor2 = (2.05 - ds.getAnalogIn(2)) / 2.05;
 		
 		if (-.05 < setMotor1 && setMotor1 < .05)
 		    setMotor1 = 0;
