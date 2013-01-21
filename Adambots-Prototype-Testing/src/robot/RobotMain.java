@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStationLCD;
 import edu.wpi.first.wpilibj.SimpleRobot;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -23,23 +24,28 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class RobotMain extends SimpleRobot {
     
-    FancyJoystick joy;
+    private FancyJoystick joy;
     
-    Victor motor1;
-    Victor motor2;
+    private Victor motor1;
+    private Victor motor2;
+    private Counter count1;
     
-    DriverStation ds;
+    private DriverStation ds;
     
-    double currentTrigger;
-    double holdTriggerValue;
-    double setMotor1;
-    double setMotor2;
+    private double currentTrigger;
+    private double holdTriggerValue;
+    private double setMotor1;
+    private double setMotor2;
     
-    final int MOTOR_1 = 5;
-    final int MOTOR_2 = 7;
+    public static final int COUNT_1 = 1;
+    public static final int MOTOR_1 = 5;
+    public static final int MOTOR_2 = 7;
     
-    boolean holdReleased = true;
-    boolean useHoldValue = false;
+    private boolean holdReleased = true;
+    private boolean useHoldValue = false;
+    
+    private double time;
+    private double RPM;
     
     public void robotInit() {
 	System.out.println("Initiailized");
@@ -48,6 +54,9 @@ public class RobotMain extends SimpleRobot {
 	motor2 = new Victor(MOTOR_2);
 	ds = DriverStation.getInstance();
 	currentTrigger = 0;
+	count1 = new Counter(COUNT_1);
+	time = 0.0;
+	RPM = 0;
     }
     
     /**
@@ -104,6 +113,10 @@ public class RobotMain extends SimpleRobot {
 	    SmartDashboard.putNumber(("Motor1Value"), setMotor1);
 	    SmartDashboard.putNumber(("Motor2Value"), setMotor2);
 	    DriverStationLCD.getInstance().println(DriverStationLCD.Line.kUser1, 1, "Hello World");
+	
+	    time = count1.getPeriod();
+	    RPM = 60 / time;
+	    System.out.println("RPM:\t" + RPM);
 	}
     }
     
